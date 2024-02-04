@@ -22,7 +22,7 @@ transition-all duration-300 hover:bg-zinc-800 rounded-md">
   </div>
 
   <a href={`/playlist/${id}`} class="playlist-item transition-all duration-300
-  flex flex-col relative w-44 p-2 pb-6 overflow-hidden intems-center gap-2" 
+  flex flex-col relative w-full p-4 overflow-hidden intems-center gap-2" 
   transition:name={`playlist ${id} box`}>
     <picture class="aspect-square w-full h-auto flex-none">
       <img src={cover} alt={`Cover de ${title} por ${artistsString}`}
@@ -30,9 +30,9 @@ transition-all duration-300 hover:bg-zinc-800 rounded-md">
       transition:name={`playlist ${id} image`}>
     </picture>
 
-    <div class="flex flex-auto flex-col px-2">
+    <div class="flex flex-auto flex-col px-2 pb-2">
 
-      <h4 class="text-white text-sm" transition:name={`playlist ${id} title`}>
+      <h4 class="text-white text-sm truncate" transition:name={`playlist ${id} title`}>
         {title}
       </h4>
 

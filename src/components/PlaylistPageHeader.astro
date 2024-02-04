@@ -1,0 +1,48 @@
+---
+import { songs, type Song } from "@/lib/data";
+import { getFormattedTime } from "@/functions/getFormattedTime"
+
+const {playlist} = Astro.props;
+const { id, cover, title, artists, color } = playlist;
+const artistsString = artists.join(", ");
+
+const playlistSongs = songs.filter(song => song.albumId === playlist?.albumId);
+
+const playlistDuration = playlistSongs.reduce((totalPlaylistSeconds, song) => {
+  const songDurationInSeconds = song.duration.split(':').reduce((totalSongSeconds, value) => {
+    return totalSongSeconds * 60 +parseInt(value);
+  }, 0)
+
+  return totalPlaylistSeconds +songDurationInSeconds;
+}, 0 )
+
+---
+
+<header class="flex flex-row gap-8 px-6 mt-12 z-10">
+  <picture class="aspect-square w-52 h-52 flex-none">
+    <img src={cover} alt={`Cover de ${title}`}
+    class="object-cover w-full h-full rounded-md" 
+    transition:name={`playlist ${id} image`}>
+  </picture>
+
+  <div class="flex flex-col justify-between">
+    <h2 class="flex flex-1 items-end">Playlist</h2>
+    <div>
+      <h1 class="title-clamp text-5xl font-bold block">
+        {playlist?.title}
+        <span transition:name={`playlist ${playlist?.id} title`}></span>
+      </h1>
+    </div>
+    
+    <div class="flex-1 flex items-end">
+      <div class="text-sm text-gray-300 font-normal">
+        <div transition:name={`playlist ${playlist?.id} artists`}>
+          <span>{artistsString}</span>
+        </div>
+        <p class="mt-1">
+          <span class="text-white">{playlistSongs.length} canciones</span>, {getFormattedTime(playlistDuration)}
+        </p>
+      </div>
+    </div>
+  </div>
+</header>

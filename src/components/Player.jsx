@@ -26,16 +26,16 @@ const CurrentSong = ({ image, title, artists }) => {
   return (
     <div className={`flex items-center gap-4 relative overflow-hidden`}>
 
-      <picture className="w-16 h-16 bg-zinc-800 rounded-md shadow-lg overflow-hidden">
-        <img src={image} alt={title} />
+      <picture className="flex-shrink-0 w-14 h-14 bg-zinc-800 rounded-md shadow-lg overflow-hidden">
+        <img className="w-full h-full object-cover" src={image} alt={title} />
       </picture>
 
       <div className="flex flex-col truncate">
-        <h3 className="text-sm font-semibold block">
+        <h3 className="text-sm font-semibold block truncate">
           {title}
         </h3>
-        <span className="text-xs text-gray-400">
-          {artistsString}
+        <span className="text-xs text-gray-400 truncate">
+          { artistsString }
         </span>
       </div>
 
@@ -44,7 +44,7 @@ const CurrentSong = ({ image, title, artists }) => {
 }
 
 const SongControl = ({ audio }) => {
-  const [currentTime, setCurrentTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(null);
 
   useEffect(() => {
     audio?.current.addEventListener('timeupdate', handleTimeUpdate);
@@ -54,11 +54,11 @@ const SongControl = ({ audio }) => {
   }, [])
 
   const handleTimeUpdate = () => {
-    setCurrentTime(audio.current.currentTime);
+    setCurrentTime(!!audio.current.src ? audio.current.currentTime : null);
   }
 
   const formatTime = time => {
-    if (time == null) return "0:00";
+    if (time == null || Number.isNaN(time)) return "-:--";
 
     const seconds = Math.floor(time % 60);
     const minutes = Math.floor(time / 60);
@@ -66,23 +66,23 @@ const SongControl = ({ audio }) => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
-  const songDuration = audio?.current?.duration ?? 0;
+  const songDuration = audio?.current?.duration;
 
   return (
-    <div className="flex gap-x-1 text-sm text-zinc-400 pt-1">
-      <span>{formatTime(currentTime)}</span>
+    <div className="flex w-full gap-x-1 text-sm text-zinc-400 pt-1">
+      <span className="whitespace-nowrap min-w-10 text-right">{formatTime(currentTime)}</span>
       <Slider
         defaultValue={[0]}
         max={songDuration}
         min={0}
         value={[currentTime]}
-        className="w-[500px]"
+        className="w-full"
         onValueChange={(value) => {
           audio.current.currentTime = value
         }}
       />
 
-      <span>{formatTime(songDuration)}</span>
+      <span className="whitespace-nowrap min-w-10 text-left">{ formatTime(songDuration) }</span>
     </div>
   )
 }
@@ -105,7 +105,7 @@ const VolumeControl = () => {
   }
 
   return (
-    <div className="flex justify-center gap-x-2 text-white group">
+    <div className="flex justify-end items-center gap-x-2 text-white group w-full">
       <button className="opacity-70 hover:opacity-100 transition cursor-default py-2 ps-2" onClick={handleClickVolumen}>
         {isVolumeSilenced ? <VolumeSilence /> : <Volume />}
       </button>
@@ -115,7 +115,7 @@ const VolumeControl = () => {
         max={100}
         min={0}
         value={[volume * 100]}
-        className="w-[95px]"
+        className="w-3/5"
         onValueChange={(value) => {
           const [newVolume] = value
           const volumeValue = newVolume / 100
@@ -159,12 +159,12 @@ export function Player () {
   }
 
   return (
-    <div className="flex flex-row justify-between w-full px-4 z-50">
-      <div>
+    <div className="flex flex-row justify-between w-full px-4 pt-2 z-50">
+      <div className="w-[30%]">
         <CurrentSong {...currentMusic.song} />
       </div>
-      <div className="grid place-content-center gap-4 flex-1">
-        <div className="flex flex-col justify-center items-center">
+      <div className="flex place-content-center gap-4 flex-1 w-[40%]">
+        <div className="flex flex-col justify-center items-center w-full">
           <button className="bg-white rounded-full p-2" 
           onClick={handleClick}>
             {isPlaying ? <Pause /> : <Play />}
@@ -172,7 +172,7 @@ export function Player () {
           <SongControl audio={audioRef}/>
         </div>
       </div>
-      <div className="grid place-content-center">
+      <div className="flex items-center w-[30%]">
         <VolumeControl />
       </div>
 
