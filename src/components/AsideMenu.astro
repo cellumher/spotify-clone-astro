@@ -7,7 +7,7 @@ import {playlists} from "@/lib/data";
 import SideMenuCard from "./SideMenuCard.astro";
 ---
 
-<nav class="flex flex-col flex-1 gap-2">
+<nav class="flex flex-col flex-1 gap-2 h-full">
   <div class="bg-zinc-900 rounded-lg p-2">
     <ul>
       <SideMenuItem href="/">
@@ -20,13 +20,19 @@ import SideMenuCard from "./SideMenuCard.astro";
       </SideMenuItem>
     </ul>
   </div>
-  <div class="bg-zinc-900 rounded-lg p-2 flex-1">
+  <div class="bg-zinc-900 rounded-lg pt-2 ps-2 flex flex-col flex-1">
     <ul>
       <SideMenuItem href="/">
         <LibraryIcon />
         Tu biblioteca
       </SideMenuItem>
     </ul>
-    {playlists.map((playlist) => <SideMenuCard playlist={playlist} />)}
+
+    <div class="relative overscroll-y-contain w-full h-full overflow-hidden">
+      <ul class="absolute w-full h-full pb-2 overflow-y-auto ">
+          {playlists.map((playlist) => <li><SideMenuCard playlist={playlist} /></li> )}
+      </ul>
+
+    </div>
   </div>
 </nav>

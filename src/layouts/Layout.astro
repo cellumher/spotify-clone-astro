@@ -21,11 +21,11 @@ const { title } = Astro.props;
 		<title>{title}</title>
 		<ViewTransitions />
 	</head>
-	<body id="app" class="relative h-screen p-2 gap-2">
-			<aside class="[grid-area:aside] w-[330px] flex-col flex overflow-y-auto">
+	<body id="app" class="relative p-2 gap-2 h-full">
+			<aside class="relative [grid-area:aside] w-[330px] flex-col flex h-full">
 				<AsideMenu/>
 			</aside>
-			<main class="relative [grid-area:main] bg-zinc-900 overflow-y-auto rounded-lg">
+			<main class="relative [grid-area:main] bg-zinc-900 rounded-lg overflow-y-auto">
 				<slot />
 			</main>
 			
@@ -45,10 +45,36 @@ const { title } = Astro.props;
 </style>
 
 <style is:global>
+
+	:root {
+    --scrollbar-vertical-size: 16px;
+    --scrollbar-horizontal-size: 16px;
+	}
+
 	html {
 		font-family: "CircularStd", system-ui, sans-serif;
 		background: #000;
 		color: #fff;
+		scrollbar-color: hsla(0, 0%, 100%, 0.3) transparent;
+    scrollbar-width: 14px;
+		height: 100%;
+	}
+
+	::-webkit-scrollbar {
+    width: 14px;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: hsla(0, 0%, 100%, 0.3);
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background-color: hsla(0, 0%, 100%, 0.533);
+	}
+
+	::-webkit-scrollbar-button { 
+		display:none;
+		height: 0;
+		width: 0
 	}
 
 	@font-face {

@@ -235,7 +235,7 @@ export const songs: Song[] = [
     "image": "https://f4.bcbits.com/img/a1962013209_16.jpg",
     "artists": ["Tenno"],
     "album": "Study Session",
-    "duration": "3:40"
+    "duration": "2:59"
   },
   {
     "id": 2,
@@ -244,7 +244,7 @@ export const songs: Song[] = [
     "image": "https://f4.bcbits.com/img/a1962013209_16.jpg",
     "artists": ["Tenno"],
     "album": "Study Session",
-    "duration": "3:20"
+    "duration": "2:12"
   },
   {
     "id": 3,
@@ -253,7 +253,7 @@ export const songs: Song[] = [
     "image": "https://f4.bcbits.com/img/a1962013209_16.jpg",
     "artists": ["Tenno"],
     "album": "Study Session",
-    "duration": "2:40"
+    "duration": "3:02"
   },
   {
     "id": 4,
@@ -271,7 +271,7 @@ export const songs: Song[] = [
     "image": "https://f4.bcbits.com/img/a1962013209_16.jpg",
     "artists": ["Tenno"],
     "album": "Study Session",
-    "duration": "2:10"
+    "duration": "2:29"
   },
   {
     "id": 1,

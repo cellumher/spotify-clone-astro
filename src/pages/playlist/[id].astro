@@ -1,6 +1,7 @@
 ---
 import { CardPlayButton } from '@/components/CardPlayButton';
 import PlaylistPageHeader from '@/components/PlaylistPageHeader.astro';
+import SongsTable from '@/components/SongsTable.astro';
 import Layout from '@/layouts/Layout.astro';
 import { allPlaylists, songs, type Playlist } from "@/lib/data";
 
@@ -11,25 +12,28 @@ const playlistSongs = songs.filter(song => song.albumId === playlist?.albumId);
 ---
 
 <Layout title="Spotify Clone">
-	<div id="playlist-container"
-		class="relative flex flex-col h-full overflow-x-hidden transition-all duration-300" transition:name={`playlist ${playlist?.id} box`}>
+	<div id="playlist-container" 
+		class="relative flex flex-col h-full transition-all duration-300 z-10">
 
-    <PlaylistPageHeader playlist={playlist} />
-		
-		<section class="z-30 bg-zinc-900/20 h-full mt-6">
-			<div class="pl-6 pt-6 ">
-				<CardPlayButton client:load id={id} size="large" />
-			</div>
+		<div class="relative z-30 w-full " >
+			<PlaylistPageHeader playlist={playlist} transition:name={`playlist ${playlist?.id} box`} />
 			
-			<div class="relative z-10 px-6"></div>
+			<section class="z-20 bg-zinc-900/20 my-6 w-full">
+				<div class="pl-6 pt-6">
+					<CardPlayButton client:load id={id} size="large" />
+				</div>
+				
+				<div class="pl-6 pt-6">
+					<SongsTable songs={playlistSongs} />
+				</div>
+	
+			</section>
+		</div>
 
-		</section>
-
-
-		<div class={`absolute inset-0 mb-12 ${playlist?.color.accent} `}></div>
-		<div class="absolute inset-0 mb-12 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-zinc-900/20"></div>
+		<div class={`absolute inset-0 mb-12 ${playlist?.color.accent} z-0`}></div>
+		<div class="absolute inset-0 mb-12 bg-gradient-to-t from-zinc-900 via-zinc-900/70 to-zinc-900/20 z-0"></div>
 		
-		
+	
 	</div>
 
 </Layout>
