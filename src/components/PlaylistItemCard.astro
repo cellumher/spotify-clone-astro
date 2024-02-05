@@ -13,21 +13,23 @@ const { id, cover, title, artists, color } = playlist;
 const artistsString = artists.join(", ")
 ---
 
-<article class="group relative shadow-lg hover:shadow-xl bg-zinc-500/30 
-transition-all duration-300 hover:bg-zinc-800 rounded-md">
+<article class="group relative shadow-lg hover:shadow-xl bg-zinc-800/30 
+transition-all duration-300 hover:bg-zinc-600/40 rounded-md">
 
-  <div class=`absolute right-4 bottom-20 translate-y-2 z-10
-    transition-all duration-500 opacity-0 group-hover:translate-y-0 group-hover:opacity-100`>
-    <CardPlayButton id={id} client:visible />
-  </div>
+  
 
   <a href={`/playlist/${id}`} class="playlist-item transition-all duration-300
   flex flex-col relative w-full p-4 overflow-hidden intems-center gap-2" 
   transition:name={`playlist ${id} box`}>
-    <picture class="aspect-square w-full h-auto flex-none">
+    <picture class="relative aspect-square w-full h-auto flex-none">
       <img src={cover} alt={`Cover de ${title} por ${artistsString}`}
-      class="object-cover w-full h-full rounded-md" 
+      class="object-cover w-full h-full rounded-md drop-shadow-[0_0_13px_rgba(24,24,27,0.5)]" 
       transition:name={`playlist ${id} image`}>
+
+      <div class=`absolute right-2 bottom-2 translate-y-2 z-10
+    transition-all duration-500 opacity-0 group-hover:translate-y-0 group-hover:opacity-100`>
+    <CardPlayButton id={id} client:visible />
+  </div>
     </picture>
 
     <div class="flex flex-auto flex-col px-2 pb-2">

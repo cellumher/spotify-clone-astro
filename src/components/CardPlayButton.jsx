@@ -5,7 +5,8 @@ export function CardPlayButton ({id, size = "small"}) {
   const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } = usePlayerStore(state => state);
   const isPlayingPlaylist = isPlaying && currentMusic?.playlist?.id === id;
 
-  const handleClick = () => {
+  const handleClick = (event) => {
+    event.preventDefault();
     if (isPlayingPlaylist || currentMusic.playlist?.id === id) {
       setIsPlaying(!isPlaying);
       return;
@@ -29,13 +30,13 @@ export function CardPlayButton ({id, size = "small"}) {
 
   }
 
-  const iconClassName = size === 'small' ? 'w-4 h-4' : 'w-6 h-6'
+  const buttonPadding = size === 'small' ? 'p-3' : 'p-4'
 
 
   return (
     <button onClick={handleClick}
-      className="card-play-button rounded-full bg-green-500 p-3 font-xl">
-      {isPlayingPlaylist ? <Pause className={iconClassName} /> : <Play className={iconClassName} />}
+      className={`card-play-button rounded-full bg-green-500 font-xl ${buttonPadding}`}>
+      {isPlayingPlaylist ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
     </button>
   )
 }

@@ -16,19 +16,18 @@ const playlistSongs = songs.filter(song => song.albumId === playlist?.albumId);
 
     <PlaylistPageHeader playlist={playlist} />
 		
-		<div class="pl-6 pt-6">
-      <CardPlayButton client:load id={id} size="large" />
-    </div>
-		
-		<div class="relative z-10 px-6"></div>
-
-
-		<section>
+		<section class="z-30 bg-zinc-900/20 h-full mt-6">
+			<div class="pl-6 pt-6 ">
+				<CardPlayButton client:load id={id} size="large" />
+			</div>
+			
+			<div class="relative z-10 px-6"></div>
 
 		</section>
 
+
 		<div class={`absolute inset-0 mb-12 ${playlist?.color.accent} `}></div>
-		<div class="absolute inset-0 mb-12 bg-gradient-to-t from-zinc-900 via-zinc-900/60 "></div>
+		<div class="absolute inset-0 mb-12 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-zinc-900/20"></div>
 		
 		
 	</div>
