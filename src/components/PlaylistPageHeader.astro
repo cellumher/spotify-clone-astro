@@ -1,9 +1,9 @@
 ---
-import { songs, type Song } from "@/lib/data";
+import { songs } from "@/lib/data";
 import { getFormattedTime } from "@/functions/getFormattedTime"
 
 const {playlist} = Astro.props;
-const { id, cover, title, artists, color } = playlist;
+const { id, cover, title, artists } = playlist;
 const artistsString = artists.join(", ");
 
 const playlistSongs = songs.filter(song => song.albumId === playlist?.albumId);
