@@ -1,6 +1,6 @@
 ---
 import type { Playlist } from "@/lib/data";
-import { CardPlayButton } from "@/components/CardPlayButton";
+import { PlaylistPlayButton } from "@/components/PlaylistPlayButton";
 
 interface Props {
   playlist: Playlist
@@ -26,10 +26,10 @@ transition-all duration-300 hover:bg-zinc-600/40 rounded-md">
       class="object-cover w-full h-full rounded-md drop-shadow-[0_0_13px_rgba(24,24,27,0.5)]" 
       transition:name={`playlist ${id} image`}>
 
-      <div class=`absolute right-2 bottom-2 translate-y-2 z-10
-    transition-all duration-500 opacity-0 group-hover:translate-y-0 group-hover:opacity-100`>
-    <CardPlayButton id={id} client:visible />
-  </div>
+      <div class="absolute right-2 bottom-2 translate-y-2 z-10
+        transition-all duration-500 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+        <PlaylistPlayButton id={id} client:visible />
+      </div>
     </picture>
 
     <div class="flex flex-auto flex-col px-2 pb-2">

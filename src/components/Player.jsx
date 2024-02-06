@@ -121,6 +121,7 @@ const SongControl = ({ audio }) => {
         onValueChange={(value) => {
           audio.current.currentTime = value
         }}
+        onDragStart={() => console.log("patsata")}
       />
 
       <span className="whitespace-nowrap min-w-10 text-left">{ formatTime(songDuration) }</span>
@@ -232,7 +233,9 @@ export function Player () {
   return (
     <div className="flex flex-row justify-between w-full px-4 pt-2 z-50">
       <div className="w-[30%]">
-        <CurrentSong {...currentMusic.song} />
+        {
+          currentMusic.song && <CurrentSong {...currentMusic.song} />
+        }
       </div>
       <div className="flex place-content-center gap-4 flex-1 w-[40%]">
         <div className="flex flex-col justify-center items-center w-full">
@@ -241,7 +244,7 @@ export function Player () {
             onClick={() => handleSongChange({changeType: 'previous', endPlaylist: false})}>
             <Previous className={"fill-inherit"}/>
           </button>
-          <button className="bg-white rounded-full p-2" 
+          <button className="bg-white rounded-full p-2 hover:scale-[1.05]" 
           onClick={handlePlayClick}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
