@@ -47,7 +47,7 @@ export function SongPlayButton ({id, playlistId, order, hover}) {
         {
           (!hover && isPlayingSong) && 
           <picture className="overflow-hidden">
-            <img className="object-cover" src='../src/icons/equaliser-animated.gif' alt='equaliser animated' />
+            <img className="object-cover" src='/equaliser-animated.gif' alt='equaliser animated' />
           </picture>
         }
     </button>
